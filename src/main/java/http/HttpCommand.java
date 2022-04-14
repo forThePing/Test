@@ -28,8 +28,7 @@ public class HttpCommand implements Command<HttpMethod> {
     public String run(HttpMethod expression) throws Exception {
         if(token==null) throw new Exception("没有提供有效的登录凭证或连接已关闭");
         expression.setRequestHeader("x-access-token", token);
-        int statusCode = client.executeMethod(expression);
-        return expression.getResponseBodyAsString();
+        return client.executeMethod(expression) + "";
     }
 
     @Override

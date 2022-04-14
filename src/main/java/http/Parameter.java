@@ -1,24 +1,21 @@
 package http;
 
+import http.parse.JsonResponseParse;
+import http.parse.ParseFactory;
+import http.parse.ResponseParse;
+import http.parse.TextResponseParse;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+
+import java.io.IOException;
 
 public class Parameter {
     private String type;
     private String url;
     private String parameter;
 
-    public String getType() {
-        return type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getParameter() {
-        return parameter;
-    }
+    private ResponseParse responseParse;
+    private PostMethod postMethod;
 
     public void parse(String expression) throws Exception{
         /**run -t type -p [] -u http://*/
@@ -31,17 +28,28 @@ public class Parameter {
             if (chars.length<=1) {
                 continue;
             }
-            char first = chars[0];
-            if(first=='t'){
+            String first = "";
+            for (char c : chars) {
+                if (c==32) {
+                    break;
+                }
+                first += c;
+            }
+
+            if(first.equals("t")){
                 type = value(chars);
                 continue;
             }
-            if(first=='p'){
+            if(first.equals("p")){
                 parameter = value(chars);
                 continue;
             }
-            if(first=='u'){
+            if(first.equals("u")){
                 url = value(chars);
+                continue;
+            }
+            if(first.equals("w")){
+                responseParse = ParseFactory.getResponseParse(value(chars));
                 continue;
             }
         }
@@ -51,14 +59,22 @@ public class Parameter {
         return new String(chars, 1, chars.length-1).trim();
     }
 
+
     public HttpMethod httpMethod(){
-        PostMethod postMethod = new PostMethod(url);
+         postMethod = new PostMethod(url);
         postMethod.setRequestHeader("Content-Type", "application/json;charset=utf-8");
         if (parameter!=null) {
             postMethod.setRequestBody(parameter);
         }
         return postMethod;
     }
+    public void write() throws IOException {
+        if (responseParse==null) {
+            responseParse = new TextResponseParse();
+        }
+        responseParse.acceptText(postMethod.getResponseBodyAsString());
+    }
+
     @Override
     public String toString() {
         return "Parameter{" +
@@ -67,4 +83,5 @@ public class Parameter {
                 ", parameter='" + parameter + '\'' +
                 '}';
     }
+
 }

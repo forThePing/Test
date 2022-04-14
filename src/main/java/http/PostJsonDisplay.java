@@ -2,9 +2,10 @@ package http;
 
 import init.Command;
 import init.Display;
+import org.apache.commons.httpclient.HttpMethod;
 
 /**可以考虑添加对执行结果的解析器*/
-public class PostJsonDisplay implements Display {
+public class PostJsonDisplay implements Display  {
     private Command command;
 
     public PostJsonDisplay(Command command) {
@@ -15,9 +16,10 @@ public class PostJsonDisplay implements Display {
     public void run(String str) throws Exception {
         Parameter parameter = new Parameter();
         parameter.parse(str);
-        parameter.httpMethod();
-        String result = command.run(parameter.httpMethod());
-        System.out.println(result);
+        HttpMethod method = parameter.httpMethod();
+
+        command.run(method);
+        parameter.write();
     }
 
     @Override
