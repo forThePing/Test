@@ -22,7 +22,9 @@ public abstract class Template<T> {
         }
     }
     protected String value(char[] chars,int offset){
-        if (chars.length<=1) return "";
+        if (chars.length <= offset) {
+            return "";
+        }
         return new String(chars, offset, chars.length-1).trim();
     }
     protected abstract void parse(char[] chars ,int offset,String first,T t);
