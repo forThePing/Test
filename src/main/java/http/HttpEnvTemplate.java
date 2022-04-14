@@ -5,9 +5,9 @@ import template.Template;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class HttpTemplate<T> extends Template<T> {
+public abstract class HttpEnvTemplate<T> extends Template<T> {
 
-    private static Pattern pattern = Pattern.compile("^\\$.*\\$$");
+    private static Pattern pattern = Pattern.compile("^[$].*[$]$");
     @Override
     protected String value(char[] chars, int offset) {
         String value = super.value(chars, offset);

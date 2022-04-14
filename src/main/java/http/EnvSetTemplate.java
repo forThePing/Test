@@ -1,6 +1,6 @@
 package http;
 
-public class EnvSetTemplate extends HttpTemplate<EnvSetParameter> {
+public class EnvSetTemplate extends HttpEnvTemplate<EnvSetParameter> {
     @Override
     protected void parse(char[] chars, int offset, String first, EnvSetParameter envSetParameter) {
         if(first.equals("n")){

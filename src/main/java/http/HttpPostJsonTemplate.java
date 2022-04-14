@@ -2,7 +2,7 @@ package http;
 
 import http.parse.ParseFactory;
 
-public class HttpPostJsonTemplate extends HttpTemplate<PostJsonParameter> {
+public class HttpPostJsonTemplate extends HttpEnvTemplate<PostJsonParameter> {
 
     @Override
     protected void parse(char[] chars,int offset,String first, PostJsonParameter parameter) {
