@@ -1,6 +1,5 @@
 package http;
 
-import http.parse.JsonResponseParse;
 import http.parse.ParseFactory;
 import http.parse.ResponseParse;
 import http.parse.TextResponseParse;
@@ -17,48 +16,31 @@ public class Parameter {
     private ResponseParse responseParse;
     private PostMethod postMethod;
 
+    private HttpPostJsonTemplate httpPostJsonTemplate ;
+
+    public Parameter() {
+        httpPostJsonTemplate = new HttpPostJsonTemplate();
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
+    }
+
+    public void setResponseParse(ResponseParse responseParse) {
+        this.responseParse = responseParse;
+    }
+
     public void parse(String expression) throws Exception{
-        /**run -t type -p [] -u http://*/
-        String[] context = expression.split("\\s+-");
-        for (String str : context) {
-            if(str.length()==0){
-                continue;
-            }
-            char[] chars = str.toCharArray();
-            if (chars.length<=1) {
-                continue;
-            }
-            String first = "";
-            for (char c : chars) {
-                if (c==32) {
-                    break;
-                }
-                first += c;
-            }
-
-            if(first.equals("t")){
-                type = value(chars);
-                continue;
-            }
-            if(first.equals("p")){
-                parameter = value(chars);
-                continue;
-            }
-            if(first.equals("u")){
-                url = value(chars);
-                continue;
-            }
-            if(first.equals("w")){
-                responseParse = ParseFactory.getResponseParse(value(chars));
-                continue;
-            }
-        }
+        httpPostJsonTemplate.accept(expression, this);
     }
-    private String value(char[] chars){
-        if (chars.length<=1) return "";
-        return new String(chars, 1, chars.length-1).trim();
-    }
-
 
     public HttpMethod httpMethod(){
          postMethod = new PostMethod(url);
