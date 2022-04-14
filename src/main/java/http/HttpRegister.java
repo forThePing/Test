@@ -3,6 +3,7 @@ package http;
 import http.display.EnvSetDisplay;
 import http.display.EnvShowDisplay;
 import http.display.HelpDisplay;
+import http.method.Method;
 import init.Command;
 import init.Display;
 import init.Register;
@@ -12,10 +13,10 @@ import java.util.Map;
 
 public class HttpRegister implements Register {
 
-    private Command command;
+    private Command<Method> command;
     private Map<String, Display> displayMap;
 
-    public HttpRegister(Command command) {
+    public HttpRegister(Command<Method> command) {
         this.command = command;
     }
 

@@ -1,10 +1,11 @@
 package http;
 
+import http.method.Method;
 import init.Command;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 
-public class HttpCommand implements Command<HttpMethod> {
+public class HttpCommand implements Command<Method> {
     private String token;
     private HttpClient client;
 
@@ -25,10 +26,10 @@ public class HttpCommand implements Command<HttpMethod> {
     }
 
     @Override
-    public String run(HttpMethod expression) throws Exception {
+    public String run(Method expression) throws Exception {
         if(token==null) throw new Exception("没有提供有效的登录凭证或连接已关闭");
-        expression.setRequestHeader("x-access-token", token);
-        return client.executeMethod(expression) + "";
+        expression.setToken(token);
+        return client.executeMethod(expression.getHttpMethod()) + "";
     }
 
     @Override

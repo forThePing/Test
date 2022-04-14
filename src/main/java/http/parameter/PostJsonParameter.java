@@ -14,7 +14,6 @@ public class PostJsonParameter {
     private String parameter;
 
     private ResponseParse responseParse;
-    private PostMethod postMethod;
 
     private HttpPostJsonTemplate httpPostJsonTemplate ;
 
@@ -38,25 +37,26 @@ public class PostJsonParameter {
         this.responseParse = responseParse;
     }
 
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getParameter() {
+        return parameter;
+    }
+
     public void parse(String expression) throws Exception{
         httpPostJsonTemplate.accept(expression, this);
     }
 
-    public HttpMethod httpMethod(){
-         postMethod = new PostMethod(url);
-        postMethod.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-        if (parameter!=null) {
-            postMethod.setRequestBody(parameter);
-        }
-        return postMethod;
-    }
-    public void write() throws IOException {
+    public void write(String result) {
         if (responseParse==null) {
             responseParse = new TextResponseParse();
         }
-        responseParse.acceptText(postMethod.getResponseBodyAsString());
+        responseParse.acceptText(result);
     }
-
     @Override
     public String toString() {
         return "Parameter{" +
