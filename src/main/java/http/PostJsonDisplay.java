@@ -24,6 +24,6 @@ public class PostJsonDisplay implements Display  {
 
     @Override
     public String desc() {
-        return "postJson 执行http post 请求 postJson -u http:// -p {\"name\":\"doctor\"}";
+        return "postJson 执行http post 请求 postJson -u http:// -p {\"name\":\"doctor\"} -w json (目前有文本与json的 )";
     }
 }
