@@ -1,5 +1,6 @@
-package http;
+package http.template;
 
+import http.PostJsonParameter;
 import http.parse.ParseFactory;
 
 public class HttpPostJsonTemplate extends HttpEnvTemplate<PostJsonParameter> {

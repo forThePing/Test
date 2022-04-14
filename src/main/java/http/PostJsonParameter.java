@@ -2,6 +2,7 @@ package http;
 
 import http.parse.ResponseParse;
 import http.parse.TextResponseParse;
+import http.template.HttpPostJsonTemplate;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 

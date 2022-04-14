@@ -1,5 +1,6 @@
-package http;
+package http.template;
 
+import http.EnvironmentConfig;
 import template.Template;
 
 import java.util.regex.Matcher;

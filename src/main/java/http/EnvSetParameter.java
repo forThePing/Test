@@ -1,5 +1,7 @@
 package http;
 
+import http.template.EnvSetTemplate;
+
 public class EnvSetParameter {
     private String name;
     private String value;
