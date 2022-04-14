@@ -11,6 +11,6 @@ public class EnvShowDisplay implements Display {
 
     @Override
     public String desc() {
-        return "envShow 显示所有环境变量";
+        return "envShow 显示所有环境变量 , 引用时用双$$包含，如 $name$";
     }
 }

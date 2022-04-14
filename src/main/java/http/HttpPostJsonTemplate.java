@@ -1,9 +1,8 @@
 package http;
 
 import http.parse.ParseFactory;
-import template.Template;
 
-public class HttpPostJsonTemplate extends Template<PostJsonParameter> {
+public class HttpPostJsonTemplate extends HttpTemplate<PostJsonParameter> {
 
     @Override
     protected void parse(char[] chars,int offset,String first, PostJsonParameter parameter) {
