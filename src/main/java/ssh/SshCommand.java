@@ -27,8 +27,8 @@ public class SshCommand implements Command<String> {
     @Override
     public void connect() throws Exception {
         JSch jSch = new JSch();
-        session = jSch.getSession("everjiankang", "10.100.1.229", 22);
-        session.setPassword("everjiankang");
+        session = jSch.getSession(userName, host, port);
+        session.setPassword(passWord);
         session.setConfig("StrictHostKeyChecking", "no");
         session.connect();
 
