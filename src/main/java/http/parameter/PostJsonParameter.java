@@ -9,7 +9,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import java.io.IOException;
 
 public class PostJsonParameter {
-    private String type;
     private String url;
     private String parameter;
 
@@ -19,10 +18,6 @@ public class PostJsonParameter {
 
     public PostJsonParameter() {
         httpPostJsonTemplate = new HttpPostJsonTemplate();
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public void setUrl(String url) {
@@ -60,7 +55,6 @@ public class PostJsonParameter {
     @Override
     public String toString() {
         return "Parameter{" +
-                "type='" + type + '\'' +
                 ", url='" + url + '\'' +
                 ", parameter='" + parameter + '\'' +
                 '}';
