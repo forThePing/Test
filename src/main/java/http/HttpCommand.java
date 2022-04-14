@@ -2,14 +2,18 @@ package http;
 
 import init.Command;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.HttpMethod;
 
-public class HttpCommand implements Command {
+public class HttpCommand implements Command<HttpMethod> {
     private String token;
     private HttpClient client;
 
     public HttpCommand(String token) {
         this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     @Override
@@ -21,11 +25,11 @@ public class HttpCommand implements Command {
     }
 
     @Override
-    public String run(String expression) throws Exception {
+    public String run(HttpMethod expression) throws Exception {
         if(token==null) throw new Exception("没有提供有效的登录凭证或连接已关闭");
-        Parameter parameter = new Parameter();
-        parameter.parse(expression);
-        return parameter.response(client, token);
+        expression.setRequestHeader("x-access-token", token);
+        int statusCode = client.executeMethod(expression);
+        return expression.getResponseBodyAsString();
     }
 
     @Override

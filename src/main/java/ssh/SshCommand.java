@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-public class SshCommand implements Command {
+public class SshCommand implements Command<String> {
 
     private String host;
     private int port ;

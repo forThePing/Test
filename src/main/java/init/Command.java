@@ -1,7 +1,7 @@
 package init;
 
-public interface Command {
+public interface Command<T> {
     void connect() throws Exception;
-    String run(String expression) throws Exception;
+    String run(T expression) throws Exception;
     void disconnect();
 }

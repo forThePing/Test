@@ -13,7 +13,10 @@ public class PostJsonDisplay implements Display {
 
     @Override
     public void run(String str) throws Exception {
-        String result = command.run(str);
+        Parameter parameter = new Parameter();
+        parameter.parse(str);
+        parameter.httpMethod();
+        String result = command.run(parameter.httpMethod());
         System.out.println(result);
     }
 

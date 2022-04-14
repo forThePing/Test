@@ -1,6 +1,5 @@
 package http;
 
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
@@ -52,19 +51,13 @@ public class Parameter {
         return new String(chars, 1, chars.length-1).trim();
     }
 
-    private HttpMethod httpMethod(String token){
+    public HttpMethod httpMethod(){
         PostMethod postMethod = new PostMethod(url);
         postMethod.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-        postMethod.setRequestHeader("x-access-token", token);
         if (parameter!=null) {
             postMethod.setRequestBody(parameter);
         }
         return postMethod;
-    }
-    public String response(HttpClient client,String token) throws Exception{
-        HttpMethod method = httpMethod(token);
-        int statusCode = client.executeMethod(method);
-        return method.getResponseBodyAsString();
     }
     @Override
     public String toString() {
