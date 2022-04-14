@@ -16,8 +16,10 @@ public abstract class HttpEnvTemplate<T> extends Template<T> {
         String value = super.value(chars, offset);
         Matcher matcher = pattern.matcher(value);
         Map<String, String> cache = new HashMap<>();
+        String group = null;
         while(matcher.find()) {
-            cache.put("\\$"+matcher.group(1)+"\\$", EnvironmentConfig.getValue(matcher.group(1)));
+            group = matcher.group(1);
+            cache.put("\\$"+ group +"\\$", EnvironmentConfig.getValue(group));
         }
         value = value.trim();
         for (Map.Entry<String, String> entry : cache.entrySet()) {
