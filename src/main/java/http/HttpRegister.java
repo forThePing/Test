@@ -3,6 +3,7 @@ package http;
 import http.display.EnvSetDisplay;
 import http.display.EnvShowDisplay;
 import http.display.HelpDisplay;
+import http.display.PostJsonDisplay;
 import http.method.Method;
 import init.Command;
 import init.Display;
