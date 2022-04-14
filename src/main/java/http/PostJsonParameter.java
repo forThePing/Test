@@ -1,6 +1,5 @@
 package http;
 
-import http.parse.ParseFactory;
 import http.parse.ResponseParse;
 import http.parse.TextResponseParse;
 import org.apache.commons.httpclient.HttpMethod;
@@ -8,7 +7,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 import java.io.IOException;
 
-public class Parameter {
+public class PostJsonParameter {
     private String type;
     private String url;
     private String parameter;
@@ -18,7 +17,7 @@ public class Parameter {
 
     private HttpPostJsonTemplate httpPostJsonTemplate ;
 
-    public Parameter() {
+    public PostJsonParameter() {
         httpPostJsonTemplate = new HttpPostJsonTemplate();
     }
 

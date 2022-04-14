@@ -22,10 +22,18 @@ public class HttpRegister implements Register {
         PostJsonDisplay postJson = new PostJsonDisplay(command);
         displayMap.put("postJson", postJson);
 
+        EnvSetDisplay envSet = new EnvSetDisplay();
+        displayMap.put("envSet", envSet);
+
+        EnvShowDisplay envShow = new EnvShowDisplay();
+        displayMap.put("envShow", envShow);
+
         HelpDisplay help = new HelpDisplay();
         displayMap.put("help", help);
 
         help.addDisplay(postJson);
+        help.addDisplay(envSet);
+        help.addDisplay(envShow);
     }
 
     @Override

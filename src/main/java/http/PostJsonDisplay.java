@@ -14,7 +14,7 @@ public class PostJsonDisplay implements Display  {
 
     @Override
     public void run(String str) throws Exception {
-        Parameter parameter = new Parameter();
+        PostJsonParameter parameter = new PostJsonParameter();
         parameter.parse(str);
         HttpMethod method = parameter.httpMethod();
 

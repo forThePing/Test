@@ -3,10 +3,10 @@ package http;
 import http.parse.ParseFactory;
 import template.Template;
 
-public class HttpPostJsonTemplate extends Template<Parameter> {
+public class HttpPostJsonTemplate extends Template<PostJsonParameter> {
 
     @Override
-    protected void parse(char[] chars,int offset,String first, Parameter parameter) {
+    protected void parse(char[] chars,int offset,String first, PostJsonParameter parameter) {
         if(first.equals("t")){
             parameter.setType(value(chars,offset));
             return;
