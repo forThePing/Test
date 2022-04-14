@@ -1,5 +1,6 @@
 package http;
 
+import http.parameter.PostJsonParameter;
 import init.Command;
 import init.Display;
 import org.apache.commons.httpclient.HttpMethod;

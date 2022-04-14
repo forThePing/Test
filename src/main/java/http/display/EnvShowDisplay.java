@@ -1,5 +1,6 @@
-package http;
+package http.display;
 
+import http.EnvironmentConfig;
 import init.Display;
 
 public class EnvShowDisplay implements Display {

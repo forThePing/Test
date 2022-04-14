@@ -1,5 +1,6 @@
-package http;
+package http.parameter;
 
+import http.EnvironmentConfig;
 import http.template.EnvSetTemplate;
 
 public class EnvSetParameter {

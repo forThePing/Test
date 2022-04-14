@@ -1,6 +1,6 @@
 package http.template;
 
-import http.EnvSetParameter;
+import http.parameter.EnvSetParameter;
 
 public class EnvSetTemplate extends HttpEnvTemplate<EnvSetParameter> {
     @Override

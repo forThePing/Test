@@ -1,4 +1,4 @@
-package http;
+package http.parameter;
 
 import http.parse.ResponseParse;
 import http.parse.TextResponseParse;

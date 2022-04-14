@@ -1,5 +1,8 @@
 package http;
 
+import http.display.EnvSetDisplay;
+import http.display.EnvShowDisplay;
+import http.display.HelpDisplay;
 import init.Command;
 import init.Display;
 import init.Register;
