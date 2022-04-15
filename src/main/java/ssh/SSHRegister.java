@@ -5,7 +5,7 @@ import init.Display;
 import init.Register;
 import ssh.keyword.*;
 import ssh.parse.DeletePayLogParse;
-import ssh.parse.LogParse;
+import ssh.parse.ResultParse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class SSHRegister implements Register {
     private Command command;
     private Map<String, Display> displayMap;
     private Map<String, Operation> cache;
-    private Map<String, LogParse> parseMap;
+    private Map<String, ResultParse> parseMap;
 
     public SSHRegister(Command command) {
         this.command = command;
@@ -75,10 +75,21 @@ public class SSHRegister implements Register {
 
     private void selfInit(){
         try {
-            scanner("set cd /***");
+            /**
+             * thc-kuber-hazxy-prod     thc-kuber-shxg-prod    thc-kuber-ycza-prod
+             * thc-kuber-office-unprod  thc-kuber-ucbj-prod
+             * thc-kuber-ryxygt-prod    thc-kuber-ucbj-unprod
+             * */
+            scanner("set cd /data/applogs/k8s/thc-kuber-hazxy-prod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-shxg-prod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-ycza-prod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-office-unprod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-ucbj-prod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-ryxygt-prod");
+            scanner("set cd /data/applogs/k8s/thc-kuber-ucbj-unprod");
             scanner("set cd /**");
             scanner("set ls");
-            scanner("set grep -a \"结算\" ***");
+            //scanner("set grep -a \"结算\" ***");
             //scanner("setParse deletePay");
         } catch (Exception e) {
             e.printStackTrace();

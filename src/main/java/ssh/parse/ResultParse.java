@@ -1,6 +1,6 @@
 package ssh.parse;
 
-public interface LogParse {
+public interface ResultParse {
     void parse(String str);
     String name();
 }

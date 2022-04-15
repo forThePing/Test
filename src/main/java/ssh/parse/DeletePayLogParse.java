@@ -1,6 +1,6 @@
 package ssh.parse;
 
-public class DeletePayLogParse implements LogParse{
+public class DeletePayLogParse implements ResultParse {
     @Override
     public void parse(String str) {
         if (str.length()==0) {

@@ -3,7 +3,7 @@ package ssh.keyword;
 import init.Command;
 import init.Display;
 import ssh.Operation;
-import ssh.parse.LogParse;
+import ssh.parse.ResultParse;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public class RunDisplay implements Display {
     private Command command;
     private Map<String, Operation> cache;
 
-    private LogParse logParse;
+    private ResultParse logParse;
 
 
     public RunDisplay(Command command, Map<String, Operation> cache) {
@@ -20,7 +20,7 @@ public class RunDisplay implements Display {
         this.cache = cache;
     }
 
-    public void setLogParse(LogParse logParse) {
+    public void setLogParse(ResultParse logParse) {
         this.logParse = logParse;
     }
 

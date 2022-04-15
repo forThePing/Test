@@ -1,14 +1,14 @@
 package ssh.keyword;
 
 import init.Display;
-import ssh.parse.LogParse;
+import ssh.parse.ResultParse;
 
 import java.util.Map;
 
 public class ShowLogParserDisplay  implements Display {
-    private Map<String, LogParse> parseMap;
+    private Map<String, ResultParse> parseMap;
 
-    public ShowLogParserDisplay(Map<String, LogParse> parseMap) {
+    public ShowLogParserDisplay(Map<String, ResultParse> parseMap) {
         this.parseMap = parseMap;
     }
 
