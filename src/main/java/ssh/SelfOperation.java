@@ -43,6 +43,13 @@ public class SelfOperation implements Operation {
 
     @Override
     public void reset() {
+        if (operation == this) {
+            operation = null;
+            return;
+        }
+        if (operation != null) {
+            operation.reset();
+        }
         operation = null;
     }
 }
