@@ -3,16 +3,17 @@ package ssh.keyword;
 import init.Display;
 import ssh.Operation;
 import ssh.SelfOperation;
+import ssh.config.Context;
 
 import java.util.Map;
 
 public class SetDisplay implements Display {
 
-    private Map<String, Operation> cache;
+    private Context context;
     private NumberGenerate numberGenerate ;
 
-    public SetDisplay(Map<String, Operation> cache, NumberGenerate numberGenerate) {
-        this.cache = cache;
+    public SetDisplay(Context context, NumberGenerate numberGenerate) {
+        this.context = context;
         this.numberGenerate = numberGenerate;
     }
 
@@ -28,7 +29,7 @@ public class SetDisplay implements Display {
             result += " ";
             result += sequence[i];
         }
-        cache.put(numberGenerate.get(), new SelfOperation(result));
+        context.putOperation(numberGenerate.get(), new SelfOperation(result));
     }
 
     @Override

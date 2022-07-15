@@ -3,6 +3,7 @@ package ssh.keyword;
 import init.Command;
 import init.Display;
 import ssh.Operation;
+import ssh.config.Context;
 import ssh.parse.ResultParse;
 
 import java.util.Map;
@@ -10,14 +11,14 @@ import java.util.Map;
 public class RunDisplay implements Display {
 
     private Command command;
-    private Map<String, Operation> cache;
+    private Context context;
 
     private ResultParse logParse;
 
 
-    public RunDisplay(Command command, Map<String, Operation> cache) {
+    public RunDisplay(Command command, Context context) {
         this.command = command;
-        this.cache = cache;
+        this.context = context;
     }
 
     public void setLogParse(ResultParse logParse) {
@@ -31,10 +32,10 @@ public class RunDisplay implements Display {
             System.out.println("没有选择组合");
             return;
         }
-        String[] context = sequence[1].split(",");
+        String[] seq = sequence[1].split(",");
         Operation selfOperation = null;
-        for (String key : context) {
-            Operation self = cache.get(key);
+        for (String key : seq) {
+            Operation self = context.getOperation(key);
             if (self == null) {
                 continue;
             }

@@ -1,20 +1,18 @@
 package ssh.keyword;
 
 import init.Display;
-import ssh.Operation;
-
-import java.util.Map;
+import ssh.config.Context;
 
 public class ResetDisplay implements Display {
-    private Map<String, Operation> cache;
+    private Context context;
 
-    public ResetDisplay(Map<String, Operation> cache) {
-        this.cache = cache;
+    public ResetDisplay(Context context) {
+        this.context = context;
     }
 
     @Override
     public void run(String str) {
-        cache.forEach((key,operation)->{
+        context.forEachOperation((key, operation)->{
             operation.reset();
         });
     }

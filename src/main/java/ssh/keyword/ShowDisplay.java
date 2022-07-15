@@ -1,20 +1,19 @@
 package ssh.keyword;
 
 import init.Display;
-import ssh.Operation;
-
-import java.util.Map;
+import ssh.config.Context;
 
 public class ShowDisplay implements Display {
-    private Map<String, Operation> cache;
 
-    public ShowDisplay(Map<String, Operation> cache) {
-        this.cache = cache;
+    private Context context;
+
+    public ShowDisplay(Context context) {
+        this.context = context;
     }
 
     @Override
     public void run(String str) {
-        cache.forEach((key,operation)->{
+        context.forEachOperation((key, operation)->{
             System.out.println(key + "：" + operation.command());
         });
     }
