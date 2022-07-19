@@ -3,6 +3,7 @@ package ssh;
 import init.Command;
 import init.Display;
 import init.Register;
+import ssh.config.Context;
 import ssh.keyword.*;
 import ssh.parse.DeletePayLogParse;
 import ssh.parse.ResultParse;
@@ -12,15 +13,19 @@ import java.util.Map;
 
 public class SSHRegister implements Register {
     private Command command;
+    private Context context;
     private Map<String, Display> displayMap;
-    private Map<String, Operation> cache;
     private Map<String, ResultParse> parseMap;
 
     public SSHRegister(Command command) {
+       this(command, new Context());
+    }
+
+    public SSHRegister(Command command,Context context) {
         this.command = command;
         displayMap = new HashMap<>();
-        cache = new HashMap<>();
         parseMap = new HashMap<>();
+        this.context = context;
     }
 
     @Override
@@ -33,30 +38,33 @@ public class SSHRegister implements Register {
         EndDisplay end = new EndDisplay(command);
         displayMap.put("end", end);
 
-        SetDisplay set = new SetDisplay(cache, numberGenerate);
+        SetDisplay set = new SetDisplay(context, numberGenerate);
         displayMap.put("set", set);
 
-        ShowDisplay show = new ShowDisplay(cache);
+        ShowDisplay show = new ShowDisplay(context);
         displayMap.put("show", show);
 
-        ResetDisplay reset = new ResetDisplay(cache);
+        ResetDisplay reset = new ResetDisplay(context);
         displayMap.put("reset", reset);
 
-        RemoveDisplay remove = new RemoveDisplay(cache);
+        RemoveDisplay remove = new RemoveDisplay(context);
         displayMap.put("remove", remove);
 
-        ResetNumberDisplay resetNumber = new ResetNumberDisplay(cache, numberGenerate);
+        ResetNumberDisplay resetNumber = new ResetNumberDisplay(context);
         displayMap.put("resetNumber", resetNumber);
 
-        RunDisplay run = new RunDisplay(command, cache);
+        RunDisplay run = new RunDisplay(command, context);
         displayMap.put("run", run);
+
+        LineDisplay lineDisplay = new LineDisplay(command);
+        displayMap.put("line", lineDisplay);
 
         SetParseDisplay setParse = new SetParseDisplay(parseMap, run);
         displayMap.put("setParse", setParse);
 
         ShowLogParserDisplay showParse = new ShowLogParserDisplay(parseMap);
         displayMap.put("showParse", showParse);
-        selfInit();
+
         help.addDisplay(help);
         help.addDisplay(end);
         help.addDisplay(set);
@@ -65,6 +73,7 @@ public class SSHRegister implements Register {
         help.addDisplay(remove);
         help.addDisplay(resetNumber);
         help.addDisplay(run);
+        help.addDisplay(lineDisplay);
         help.addDisplay(setParse);
         help.addDisplay(showParse);
     }
@@ -73,28 +82,6 @@ public class SSHRegister implements Register {
         parseMap.put("deletePay", new DeletePayLogParse());
     }
 
-    private void selfInit(){
-        try {
-            /**
-             * thc-kuber-hazxy-prod     thc-kuber-shxg-prod    thc-kuber-ycza-prod
-             * thc-kuber-office-unprod  thc-kuber-ucbj-prod
-             * thc-kuber-ryxygt-prod    thc-kuber-ucbj-unprod
-             * */
-            scanner("set cd /data/applogs/k8s/thc-kuber-hazxy-prod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-shxg-prod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-ycza-prod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-office-unprod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-ucbj-prod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-ryxygt-prod");
-            scanner("set cd /data/applogs/k8s/thc-kuber-ucbj-unprod");
-            scanner("set cd /**");
-            scanner("set ls");
-            //scanner("set grep -a \"结算\" ***");
-            //scanner("setParse deletePay");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void scanner(String str) throws Exception {
